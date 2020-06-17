@@ -35,6 +35,12 @@ jobs:
         inlineScript: |
           az aks get-credentials --resource-group ${{ env.AKS_RESOURCE_GROUP }} --name ${{ env.AZURE_AKS_CLUSTER }}
 
+    - uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.AZURE_AKS_CLUSTER }}
+        resource-group: ${{ env.AKS_RESOURCE_GROUP }}
+
     #- name: Configure ACR integration
     #  uses: azure/CLI@v1.0.0
     #  with:
