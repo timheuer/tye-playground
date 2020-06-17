@@ -56,7 +56,7 @@ jobs:
 
     - name: tye deploy
       run: |
-        tye deploy
+        tye deploy -v Debug
 
     - name: Azure logout
       working-directory: .
