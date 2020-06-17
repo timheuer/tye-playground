@@ -1,6 +1,6 @@
 name: Build and Deploy
 
-on: [pull_request]
+on: [push]
 
 env:
   AZURE_AKS_CLUSTER: tyeplayground
