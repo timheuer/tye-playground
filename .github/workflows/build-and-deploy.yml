@@ -35,6 +35,12 @@ jobs:
         inlineScript: |
           az aks get-credentials --resource-group ${{ env.AKS_RESOURCE_GROUP }} --name ${{ env.AZURE_AKS_CLUSTER }}
 
+    - uses: Azure/docker-login@v1  
+      with:  
+        login-server: tyeregistry.azurecr.io
+        username: ${{ secrets.ACR_USER }}  
+        password: ${{ secrets.ACR_PASSWORD }}
+
     - uses: azure/aks-set-context@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
