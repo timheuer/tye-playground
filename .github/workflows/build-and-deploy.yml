@@ -35,12 +35,12 @@ jobs:
         inlineScript: |
           az aks get-credentials --resource-group ${{ env.AKS_RESOURCE_GROUP }} --name ${{ env.AZURE_AKS_CLUSTER }}
 
-    - name: Configure ACR integration
-      uses: azure/CLI@v1.0.0
-      with:
-        azcliversion: latest
-        inlineScript: |
-          az aks update -n ${{ env.AZURE_AKS_CLUSTER }} -g ${{ env.AKS_RESOURCE_GROUP }} --attach-acr ${{ env.ACR_RESOURCE }}
+    #- name: Configure ACR integration
+    #  uses: azure/CLI@v1.0.0
+    #  with:
+    #    azcliversion: latest
+    #    inlineScript: |
+    #      az aks update -n ${{ env.AZURE_AKS_CLUSTER }} -g ${{ env.AKS_RESOURCE_GROUP }} --attach-acr ${{ env.ACR_RESOURCE }}
 
     - name: tye deploy
       run: |
