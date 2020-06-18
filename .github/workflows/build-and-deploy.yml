@@ -5,7 +5,7 @@ on: [push]
 env:
   AZURE_AKS_CLUSTER: tyeplayground
   AKS_RESOURCE_GROUP: projecttyeresources
-  ACR_RESOURCE: tyeregistry
+  ACR_RESOURCE_URI: tyeregistry.azurecr.io
 
 jobs:
   build:
@@ -28,20 +28,15 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS  }}
 
-    - name: Ensure AKS context
-      uses: azure/CLI@v1.0.0
-      with:
-        azcliversion: latest
-        inlineScript: |
-          az aks get-credentials --resource-group ${{ env.AKS_RESOURCE_GROUP }} --name ${{ env.AZURE_AKS_CLUSTER }}
-
-    - uses: Azure/docker-login@v1  
+    - name: Login to ACR
+      uses: Azure/docker-login@v1  
       with:  
-        login-server: tyeregistry.azurecr.io
+        login-server: ${{ env.ACR_RESOURCE_URI }}
         username: ${{ secrets.ACR_USER }}  
         password: ${{ secrets.ACR_PASSWORD }}
 
-    - uses: azure/aks-set-context@v1
+    - name: Set AKS context
+      uses: azure/aks-set-context@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: ${{ env.AZURE_AKS_CLUSTER }}
