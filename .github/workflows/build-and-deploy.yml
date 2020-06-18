@@ -41,6 +41,10 @@ jobs:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: ${{ env.AZURE_AKS_CLUSTER }}
         resource-group: ${{ env.AKS_RESOURCE_GROUP }}
+    
+    - name: Install ingress-nginx
+      run: |
+        kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud/deploy.yaml
 
     #- name: Configure ACR integration
     #  uses: azure/CLI@v1.0.0
